@@ -43,8 +43,8 @@ class Qmp(AutotoolsPackage):
         if '+mpi' in self.spec:
           args += [
               '--with-qmp-comms-type=MPI',
-              'CC=%s'  % join_path(self.spec['mpi'].prefix.bin, 'mpicc'),
-              'CXX=%s' % join_path(self.spec['mpi'].prefix.bin, 'mpicxx'),
+              'CC=%s'  % self.spec['mpi'].mpicc,
+              'CXX=%s' % self.spec['mpi'].mpicxx,
               'CFLAGS=-std=c99',
               ]
         else:

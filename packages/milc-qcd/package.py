@@ -40,7 +40,7 @@ class MilcQcd(Package):
     depends_on('qla')
     depends_on('qdp')
     depends_on('qopqdp')
-    depends_on('fftw')
+    depends_on('fftw+double')
     depends_on('mpi')
 
     phases = ['edit', 'install']
@@ -59,6 +59,13 @@ class MilcQcd(Package):
         makefile.filter('QLA = .*', 'QLA = %s' % spec['qla'].prefix)
         makefile.filter('QDP = .*', 'QDP = %s' % spec['qdp'].prefix)
         makefile.filter('QOPQDP = .*', 'QOPQDP = %s' % spec['qopqdp'].prefix)
+
+        makefile.filter('PRECISION = .*', 'PRECISION = 2')
+
+        makefile.filter('WANTFFTW = .*', 'WANTFFTW = true')
+        makefile.filter('FFTW = .*', 'FFTW = %s' % spec['fftw'].prefix)
+
+        makefile.filter('OPT = .*', 'OPT = -g -O3 -march=native')
 
     def install(self, spec, prefix):
         copy = which('cp')

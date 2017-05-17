@@ -58,7 +58,7 @@ class Qio(AutotoolsPackage):
             ]
         if '+mpi' in self.spec:
           args += [
-              'CC=%s' % join_path(self.spec['mpi'].prefix.bin, 'mpicc'),
+              'CC=%s' % self.spec['mpi'].mpicc,
               'CFLAGS=-std=c99',
               '--with-qio-comms-type=MPI',
               '--enable-parallel-io',
